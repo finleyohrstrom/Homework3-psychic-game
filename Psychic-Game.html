@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>The Most Terrible Game</title>
+	<link type="text/css" rel="stylesheet" href="Psychic-Game.css"> 
+	<script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+	<div class="container" style="width: 100%; height: 100%">
+		<h1 class="title">
+			Welcome to the Worst Game!
+		</h1>
+		<button class="start">Start New Game</button>
+		<br/>
+		<h2>Guess what letter im thinking of!</h2>
+		<br/>
+		<h2>Wins: </h2>
+		<h2 class="wins">0</h2>
+		<br/>
+		<h2>Losses: </h2>
+		<h2 class="losses">0</h2>
+		<br/>
+		<h2>Your guesses so far: </h2>
+		<h2 class="guesses"></h2>	
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var wins = 0
+			var losses = 0
+			var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+			$(".start").click(function(event) {
+				var computerGuess = letters[Math.floor(Math.random() * letters.length)];
+				console.log("Computer Guess = " + computerGuess.toLowerCase());
+				document.onkeyup = function(event) {
+						var userGuess = event.key;
+						console.log(userGuess);
+
+						if (userGuess !== computerGuess.toLowerCase()) {
+							$(".guesses").append(userGuess + " ")
+							losses++
+							$(".losses").empty()
+							$(".wins").empty()
+						}
+						else if (userGuess === computerGuess.toLowerCase()) {
+							wins++
+							alert("You win! It was '" + userGuess.toUpperCase() +"' !" + "Press 'Start New Game' to effectively... start a new game.")
+
+							$(".guesses").empty()
+							$(".wins").empty()
+							$(".losses").empty()
+						};
+				console.log(wins)
+				console.log(losses)
+
+				$(".wins").append(wins);
+				$(".losses").append(losses);
+				};
+			});
+		});
+
+
+// I couldn't figure out how to make the computer guess automatically reset so thats causing some minor annoyances. otherwise yay!! 
+		
+	</script>
+</body>
+</html>
